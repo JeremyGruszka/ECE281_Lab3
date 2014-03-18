@@ -17,4 +17,4 @@ ECE281_Lab3
 6. create it, syntax is good, but board will only count the first 4 primary numbers
 7. realized I forgot to change the next state logic on my elevator controller component
 8. it worked, got the prime number functionality. now to work on the 3 input functionality
-
+9. decided to change my program so it ran using only 1 floor variable, prime numbers still work
