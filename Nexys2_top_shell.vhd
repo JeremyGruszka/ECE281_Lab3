@@ -92,17 +92,25 @@ signal ClockBus_sig : STD_LOGIC_VECTOR (26 downto 0);
 --Insert your design's component declaration below	
 --------------------------------------------------------------------------------------
 
---COMPONENT MooreElevatorController_Shell
---	PORT(
---		clk : IN std_logic;
---		reset : IN std_logic;
---		stop : IN std_logic;
---		up_down : IN std_logic;          
---		--floorMo : OUT std_logic_vector(7 downto 0)
---		floorMo : out std_logic_vector (3 downto 0)
---		);
---	END COMPONENT;
---	
+--moore elevator component
+--Component MooreElevatorController_Shell
+--    Port ( clk : in  STD_LOGIC;
+--           reset : in  STD_LOGIC;
+--           stop : in  STD_LOGIC;
+--           up_down : in  STD_LOGIC;
+--			  
+------------------------------------------------------------------------------
+----this one used for the prime number elevator
+--			  --floorMo : out  STD_LOGIC_VECTOR (7 downto 0));
+--			  
+------------------------------------------------------------------------------
+----this one used for the regular moore elevator
+--			  --floorMo : out std_logic_vector ( 3 downto 0));
+--end component;
+
+--------------------------------------------------------------------------------------
+
+--mealy elevator component
 --COMPONENT MealyElevatorController_Shell
 --	PORT(
 --		clk : IN std_logic;
@@ -114,15 +122,18 @@ signal ClockBus_sig : STD_LOGIC_VECTOR (26 downto 0);
 --		);
 --	END COMPONENT;
 	
-COMPONENT MooreElevatorChooseInputs
-	PORT(
-		clk : IN std_logic;
-		reset : IN std_logic;
-		stop : IN std_logic;
-		up_down : IN std_logic_vector(7 downto 0);          
-		floorMc : OUT std_logic_vector(7 downto 0)
-		);
-	END COMPONENT;
+--------------------------------------------------------------------------------------
+
+--change input component
+--COMPONENT MooreElevatorChooseInputs
+--	PORT(
+--		clk : IN std_logic;
+--		reset : IN std_logic;
+--		stop : IN std_logic;
+--		up_down : IN std_logic_vector(7 downto 0);          
+--		floorMc : OUT std_logic_vector(7 downto 0)
+--		);
+--	END COMPONENT;
 
 --------------------------------------------------------------------------------------
 --Insert any required signal declarations below
@@ -236,7 +247,7 @@ process (Switch(7)) is
 
 --------------------------------------------------------------------------------------
 
---uncomment the following two nibbles for prime numbers
+--uncomment the following two nibbles for change inputs
 --nibble0 <= "0000" when (floorMc = "00000000") else
 --			"0001" when (floorMc = "00000001") else
 --			"0010" when (floorMc = "00000010") else
@@ -329,4 +340,3 @@ nibble3 <= "0000";
 --	);
 
 end Behavioral;
-
