@@ -28,3 +28,5 @@ ECE281_Lab3
 17. tested my change input elevator, everything works well
 18. not going to work on the double elevator functionality because i do not have time.
 19. starting to study for the test..........
+
+#### Code Critique
