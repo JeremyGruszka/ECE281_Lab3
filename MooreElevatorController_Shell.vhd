@@ -24,18 +24,29 @@ entity MooreElevatorController_Shell is
            reset : in  STD_LOGIC;
            stop : in  STD_LOGIC;
            up_down : in  STD_LOGIC;
-           floorA : out  STD_LOGIC_VECTOR (7 downto 0);
-			  floorB : out std_logic_vector (7 downto 0));
+			  
+----------------------------------------------------------------------------
+--this one used for the prime number elevator
+			  --floorMo : out  STD_LOGIC_VECTOR (7 downto 0));
+			  
+----------------------------------------------------------------------------
+--this one used for the regular moore elevator
+			  --floorMo : out std_logic_vector ( 3 downto 0));
 end MooreElevatorController_Shell;
 
 architecture Behavioral of MooreElevatorController_Shell is
 
 --Below you create a new variable type! You also define what values that 
 --variable type can take on. Now you can assign a signal as 
---"floor_state_type" the same way you'd assign a signal as std_logic 
-type floor_state_type is (floor1, floor2, floor3, floor4, floor5, floor6, floor7, floor8);
-	
+--"floor_state_type" the same way you'd assign a signal as std_logic
 
+---------------------------------------------------------------------------- 
+--this one used for the prime number elevator
+--  type floor_state_type is (floor1, floor2, floor3, floor4, floor5, floor6, floor7, floor8);
+
+----------------------------------------------------------------------------
+--this one used for the regular moore elevator
+--type floor_state_type is (floor1, floor2, floor3, floor4);
 
 --Here you create a variable "floor_state" that can take on the values
 --defined above. Neat-o!
@@ -99,73 +110,84 @@ begin
 						floor_state <= floor3;
 					end if;
 					
-					--when our current state is floor4
-				when floor4 => 
-					--if up_down is set to "go up" and stop is set to 
-					--"don't stop" which floor do we want to go to?
-					if (up_down='1' and stop='0') then 
-						floor_state <= floor5; 			
-					--if up_down is set to "go down" and stop is set to 
-					--"don't stop" which floor do we want to go to?
-					elsif (up_down='0' and stop='0') then 
-						floor_state <= floor3;
-					--otherwise we're going to stay at floor2
-					else
-						floor_state <= floor4;
-					end if;
 					
-					--when our current state is floor5
-				when floor5 => 
-					--if up_down is set to "go up" and stop is set to 
-					--"don't stop" which floor do we want to go to?
-					if (up_down='1' and stop='0') then 
-						floor_state <= floor6; 			
-					--if up_down is set to "go down" and stop is set to 
-					--"don't stop" which floor do we want to go to?
-					elsif (up_down='0' and stop='0') then 
-						floor_state <= floor4;
-					--otherwise we're going to stay at floor2
-					else
-						floor_state <= floor5;
-					end if;
-					
-					--when our current state is floor6
-				when floor6 => 
-					--if up_down is set to "go up" and stop is set to 
-					--"don't stop" which floor do we want to go to?
-					if (up_down='1' and stop='0') then 
-						floor_state <= floor7; 			
-					--if up_down is set to "go down" and stop is set to 
-					--"don't stop" which floor do we want to go to?
-					elsif (up_down='0' and stop='0') then 
-						floor_state <= floor5;
-					--otherwise we're going to stay at floor2
-					else
-						floor_state <= floor6;
-					end if;
-					
-					--when our current state is floor7
-				when floor7 => 
-					--if up_down is set to "go up" and stop is set to 
-					--"don't stop" which floor do we want to go to?
-					if (up_down='1' and stop='0') then 
-						floor_state <= floor8; 			
-					--if up_down is set to "go down" and stop is set to 
-					--"don't stop" which floor do we want to go to?
-					elsif (up_down='0' and stop='0') then 
-						floor_state <= floor6;
-					--otherwise we're going to stay at floor2
-					else
-						floor_state <= floor7;
-					end if;
-				
-				--floor8
-				when floor8 =>
+				when floor4 =>
 					if (up_down='0' and stop='0') then 
-						floor_state <= floor7;	
+						floor_state <= floor3;	
 					else 
-						floor_state <= floor8;
+						floor_state <= floor4;
 					end if;
+					
+----------------------------------------------------------------------------
+--following commented section is for the prime number elevator
+					
+--					--when our current state is floor4
+--				when floor4 => 
+--					--if up_down is set to "go up" and stop is set to 
+--					--"don't stop" which floor do we want to go to?
+--					if (up_down='1' and stop='0') then 
+--						floor_state <= floor5; 			
+--					--if up_down is set to "go down" and stop is set to 
+--					--"don't stop" which floor do we want to go to?
+--					elsif (up_down='0' and stop='0') then 
+--						floor_state <= floor3;
+--					--otherwise we're going to stay at floor2
+--					else
+--						floor_state <= floor4;
+--					end if;
+--					
+--					--when our current state is floor5
+--				when floor5 => 
+--					--if up_down is set to "go up" and stop is set to 
+--					--"don't stop" which floor do we want to go to?
+--					if (up_down='1' and stop='0') then 
+--						floor_state <= floor6; 			
+--					--if up_down is set to "go down" and stop is set to 
+--					--"don't stop" which floor do we want to go to?
+--					elsif (up_down='0' and stop='0') then 
+--						floor_state <= floor4;
+--					--otherwise we're going to stay at floor2
+--					else
+--						floor_state <= floor5;
+--					end if;
+--					
+--					--when our current state is floor6
+--				when floor6 => 
+--					--if up_down is set to "go up" and stop is set to 
+--					--"don't stop" which floor do we want to go to?
+--					if (up_down='1' and stop='0') then 
+--						floor_state <= floor7; 			
+--					--if up_down is set to "go down" and stop is set to 
+--					--"don't stop" which floor do we want to go to?
+--					elsif (up_down='0' and stop='0') then 
+--						floor_state <= floor5;
+--					--otherwise we're going to stay at floor2
+--					else
+--						floor_state <= floor6;
+--					end if;
+--					
+--					--when our current state is floor7
+--				when floor7 => 
+--					--if up_down is set to "go up" and stop is set to 
+--					--"don't stop" which floor do we want to go to?
+--					if (up_down='1' and stop='0') then 
+--						floor_state <= floor8; 			
+--					--if up_down is set to "go down" and stop is set to 
+--					--"don't stop" which floor do we want to go to?
+--					elsif (up_down='0' and stop='0') then 
+--						floor_state <= floor6;
+--					--otherwise we're going to stay at floor2
+--					else
+--						floor_state <= floor7;
+--					end if;
+--				
+--				--floor8
+--				when floor8 =>
+--					if (up_down='0' and stop='0') then 
+--						floor_state <= floor7;	
+--					else 
+--						floor_state <= floor8;
+--					end if;
 				
 				--This line accounts for phantom states
 				when others =>
@@ -176,23 +198,25 @@ begin
 end process;
 
 -- Here you define your output logic. Finish the statements below
-floorA <= "00000010" when (floor_state = floor1) else
-			"00000011" when (floor_state = floor2) else
-			"00000101" when (floor_state = floor3) else
-			"00000111" when (floor_state = floor4) else
-			"00000001" when (floor_state = floor5) else
-			"00000011" when (floor_state = floor6) else
-			"00000111" when (floor_state = floor7) else
-			"00001001" when (floor_state = floor8) ;
-			
-floorB <= "00000000" when (floor_state = floor1) else
-			"00000000" when (floor_state = floor2) else
-			"00000000" when (floor_state = floor3) else
-			"00000000" when (floor_state = floor4) else
-			"00000001" when (floor_state = floor5) else
-			"00000001" when (floor_state = floor6) else
-			"00000001" when (floor_state = floor7) else
-			"00000001" when (floor_state = floor8) ;
+
+
+----------------------------------------------------------------------------
+--this one is for the prime number elevator
+--floorMo <= "00000001" when (floor_state = floor1) else
+--			"00000010" when (floor_state = floor2) else
+--			"00000011" when (floor_state = floor3) else
+--			"00000100" when (floor_state = floor4) else
+--			"00000101" when (floor_state = floor5) else
+--			"00000110" when (floor_state = floor6) else
+--			"00000111" when (floor_state = floor7) else
+--			"00001000" when (floor_state = floor8) ;
+
+----------------------------------------------------------------------------
+--this one is for the regular moore elevator
+--floorMo <= "0001" when (floor_state = floor1) else
+--			 "0010" when (floor_state = floor2) else
+--			 "0011" when (floor_state = floor3) else
+--			 "0100" when (floor_state = floor4);
 
 end Behavioral;
 

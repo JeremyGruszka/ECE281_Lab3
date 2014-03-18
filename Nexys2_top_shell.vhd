@@ -92,22 +92,47 @@ signal ClockBus_sig : STD_LOGIC_VECTOR (26 downto 0);
 --Insert your design's component declaration below	
 --------------------------------------------------------------------------------------
 
-COMPONENT MooreElevatorController_Shell
+--COMPONENT MooreElevatorController_Shell
+--	PORT(
+--		clk : IN std_logic;
+--		reset : IN std_logic;
+--		stop : IN std_logic;
+--		up_down : IN std_logic;          
+--		--floorMo : OUT std_logic_vector(7 downto 0)
+--		floorMo : out std_logic_vector (3 downto 0)
+--		);
+--	END COMPONENT;
+--	
+--COMPONENT MealyElevatorController_Shell
+--	PORT(
+--		clk : IN std_logic;
+--		reset : IN std_logic;
+--		stop : IN std_logic;
+--		up_down : IN std_logic;          
+--		floorMe : OUT std_logic_vector(3 downto 0);
+--		nextfloorMe : OUT std_logic_vector(3 downto 0)
+--		);
+--	END COMPONENT;
+	
+COMPONENT MooreElevatorChooseInputs
 	PORT(
 		clk : IN std_logic;
 		reset : IN std_logic;
 		stop : IN std_logic;
-		up_down : IN std_logic;          
-		floorA : OUT std_logic_vector(7 downto 0);
-		floorB : OUT std_logic_vector(7 downto 0)
+		up_down : IN std_logic_vector(7 downto 0);          
+		floorMc : OUT std_logic_vector(7 downto 0)
 		);
 	END COMPONENT;
 
 --------------------------------------------------------------------------------------
 --Insert any required signal declarations below
 --------------------------------------------------------------------------------------
-	Signal clk, reset, stop, up_down : Std_logic;
-	Signal floorA, floorB : std_logic_vector(7 downto 0);
+	--Signal clk, reset, stop, up_down : Std_logic;
+	Signal floorMe, nextfloorMe : std_logic_vector(3 downto 0);
+	--Signal floorMo : std_logic_vector(7 downto 0);
+	Signal floorMo : std_logic_vector(3 downto 0);
+	Signal floorMc, up_down : std_logic_vector (7 downto 0);
+	Signal clk, reset, stop : Std_logic;
 
 
 begin
@@ -115,7 +140,31 @@ begin
 ----------------------------
 --code below tests the LEDs:
 ----------------------------
-LED <= CLOCKBUS_SIG(26 DOWNTO 19);
+
+--the following process makes the LEDs go to the left if the elevator is going up, and 
+--to the right if the elevator is going down
+process (Switch(7)) is
+	begin
+		if Switch(7) = '1' then
+			LED(0) <= CLOCKBUS_SIG(19);
+			LED(1) <= CLOCKBUS_SIG(20);
+			LED(2) <= CLOCKBUS_SIG(21);
+			LED(3) <= CLOCKBUS_SIG(22);
+			LED(4) <= CLOCKBUS_SIG(23);
+			LED(5) <= CLOCKBUS_SIG(24);
+			LED(6) <= CLOCKBUS_SIG(25);
+			LED(7) <= CLOCKBUS_SIG(26);
+		else
+			LED(0) <= CLOCKBUS_SIG(26);
+			LED(1) <= CLOCKBUS_SIG(25);
+			LED(2) <= CLOCKBUS_SIG(24);
+			LED(3) <= CLOCKBUS_SIG(23);
+			LED(4) <= CLOCKBUS_SIG(22);
+			LED(5) <= CLOCKBUS_SIG(21);
+			LED(6) <= CLOCKBUS_SIG(20);
+			LED(7) <= CLOCKBUS_SIG(19);
+		end if;
+	end process;
 
 --------------------------------------------------------------------------------------------	
 --This code instantiates the Clock Divider. Reference the Clock Divider Module for more info
@@ -135,22 +184,59 @@ LED <= CLOCKBUS_SIG(26 DOWNTO 19);
 --		  Example: if you are not using 7-seg display #3 set nibble3 to "0000"
 --------------------------------------------------------------------------------------
 
-nibble0 <= "0010" when (floorA = "00000010") else
-			"0011" when (floorA = "00000011") else
-			"0101" when (floorA = "00000101") else
-			"0111" when (floorA = "00000111") else
-			"0001" when (floorA = "00000001") else
-			"0011" when (floorA = "00000011") else
-			"0111" when (floorA = "00000111") else
-			"1001" when (floorA = "00001001");
-nibble1 <= "0000" when (floorB = "00000000") else
-			"0000" when (floorB = "00000000") else
-			"0000" when (floorB = "00000000") else
-			"0000" when (floorB = "00000000") else
-			"0001" when (floorB = "00000001") else
-			"0001" when (floorB = "00000001") else
-			"0001" when (floorB = "00000001") else
-			"0001" when (floorB = "00000001");
+--uncomment the following two nibbles for prime numbers
+--nibble0 <= "0010" when (floorMo = "00000001") else
+--			"0011" when (floorMo = "00000010") else
+--			"0101" when (floorMo = "00000011") else
+--			"0111" when (floorMo = "00000100") else
+--			"0001" when (floorMo = "00000101") else
+--			"0011" when (floorMo = "00000110") else
+--       "0111" when (floorMo = "00000111") else
+--			"1001" when (floorMo = "00001000");
+--nibble1 <= "0000" when (floorMo = "00000001") else
+--			"0000" when (floorMo = "00000010") else
+--			"0000" when (floorMo = "00000011") else
+--			"0000" when (floorMo = "00000100") else
+--			"0001";
+--
+
+--------------------------------------------------------------------------------------
+
+--uncomment the following two nibbles for regular moore 4 floor elevator
+--nibble0 <= "0001" when (floorMo = "0001") else
+--			"0010" when (floorMo = "0010") else
+--			"0011" when (floorMo = "0011") else
+--			"0100" when (floorMo = "0100");
+--nibble1 <= "0000";
+
+--------------------------------------------------------------------------------------
+
+--uncomment the following two nibbles for regular mealy 4 floor elevator
+--nibble0 <= "0001" when (floorMe = "0001") else
+--			"0010" when (floorMe = "0010") else
+--			"0011" when (floorMe = "0011") else
+--			"0100";
+--nibble1 <= "0001" when (nextfloorMe = "0001") else
+--			"0010" when (nextfloorMe = "0010") else
+--			"0011" when (nextfloorMe = "0011") else
+--			"0100" when (nextfloorMe = "0100");
+
+--------------------------------------------------------------------------------------
+
+--uncomment the following two nibbles for prime numbers
+nibble0 <= "0000" when (floorMc = "00000000") else
+			"0001" when (floorMc = "00000001") else
+			"0010" when (floorMc = "00000010") else
+			"0011" when (floorMc = "00000011") else
+			"0100" when (floorMc = "00000100") else
+			"0101" when (floorMc = "00000101") else
+         "0110" when (floorMc = "00000110") else
+			"0111" when (floorMc = "00000111");
+nibble1 <= "0000";
+
+
+--------------------------------------------------------------------------------------
+
 nibble2 <= "0000";
 nibble3 <= "0000";
 --This code converts a nibble to a value that can be displayed on 7-segment display #0
@@ -194,13 +280,37 @@ nibble3 <= "0000";
 -----------------------------------------------------------------------------
 --Instantiate the design you with to implement below and start wiring it up!:
 -----------------------------------------------------------------------------
-Inst_MooreElevatorController_Shell: MooreElevatorController_Shell PORT MAP(
+--Inst_MooreElevatorController_Shell: MooreElevatorController_Shell PORT MAP(
+--		clk => ClockBus_sig(25),
+--		reset => switch(0),
+--		stop => switch(6),
+--		up_down => switch(7),
+--		floorMo => floorMo
+--	);
+--	
+--Inst_MealyElevatorController_Shell: MealyElevatorController_Shell PORT MAP(
+--		clk => ClockBus_sig(25),
+--		reset => switch(0),
+--		stop => switch(6),
+--		up_down => switch(7),
+--		floorMe => floorMe,
+--		nextfloorMe => nextfloorMe
+--	);
+	
+Inst_MooreElevatorChooseInputs: MooreElevatorChooseInputs PORT MAP(
 		clk => ClockBus_sig(25),
-		reset => switch(0),
-		stop => switch(6),
-		up_down => switch(7),
-		floorA => floorA,
-		floorB => floorB
+		reset => btn(0),
+		stop => btn(1),
+		up_down => switch,
+--		up_down(0) => switch(0),
+--		up_down(1) => switch(1),
+--		up_down(2) => switch(2),
+--		up_down(3) => switch(3),
+--		up_down(4) => switch(4),
+--		up_down(5) => switch(5),
+--		up_down(6) => switch(6),
+--		up_down(7) => switch(7),
+		floorMc => floorMc
 	);
 
 end Behavioral;
