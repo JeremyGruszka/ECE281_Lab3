@@ -1,9 +1,9 @@
--- Engineer: Silva
+-- Engineer: Jeremy Gruszka
 -- 
--- Create Date:    	10:33:47 07/07/2012 
--- Design Name:		CE3
--- Module Name:    	MooreElevatorController_Shell - Behavioral 
--- Description: 		Shell for completing CE3
+-- Create Date:    	
+-- Design Name:		Lab3
+-- Module Name:    	MooreElevatorChooseInputs - Behavioral 
+-- Description: 	Elevator in which the user can choose the level to go to by using three input buttons on the fpga
 --
 ----------------------------------------------------------------------------------
 library IEEE;
