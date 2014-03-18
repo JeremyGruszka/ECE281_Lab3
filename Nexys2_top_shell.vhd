@@ -127,14 +127,6 @@ COMPONENT MooreElevatorChooseInputs
 --------------------------------------------------------------------------------------
 --Insert any required signal declarations below
 --------------------------------------------------------------------------------------
-<<<<<<< HEAD
-	--Signal clk, reset, stop, up_down : Std_logic;
-	Signal floorMe, nextfloorMe : std_logic_vector(3 downto 0);
-	--Signal floorMo : std_logic_vector(7 downto 0);
-	Signal floorMo : std_logic_vector(3 downto 0);
-	Signal floorMc, up_down : std_logic_vector (7 downto 0);
-	Signal clk, reset, stop : Std_logic;
-=======
 
 --this line is for moore elevator(both regular and prime numbers
 	--Signal clk, reset, stop, up_down : Std_logic;
@@ -154,7 +146,6 @@ COMPONENT MooreElevatorChooseInputs
 --these lines are for the change input elevator
 	--Signal floorMc, up_down : std_logic_vector (7 downto 0);
 	--Signal clk, reset, stop : Std_logic;
->>>>>>> 63a65144834d0d32ac87298d163085fa8f9964f4
 
 
 begin
@@ -246,17 +237,6 @@ process (Switch(7)) is
 --------------------------------------------------------------------------------------
 
 --uncomment the following two nibbles for prime numbers
-<<<<<<< HEAD
-nibble0 <= "0000" when (floorMc = "00000000") else
-			"0001" when (floorMc = "00000001") else
-			"0010" when (floorMc = "00000010") else
-			"0011" when (floorMc = "00000011") else
-			"0100" when (floorMc = "00000100") else
-			"0101" when (floorMc = "00000101") else
-         "0110" when (floorMc = "00000110") else
-			"0111" when (floorMc = "00000111");
-nibble1 <= "0000";
-=======
 --nibble0 <= "0000" when (floorMc = "00000000") else
 --			"0001" when (floorMc = "00000001") else
 --			"0010" when (floorMc = "00000010") else
@@ -266,7 +246,6 @@ nibble1 <= "0000";
 --         "0110" when (floorMc = "00000110") else
 --			"0111" when (floorMc = "00000111");
 --nibble1 <= "0000";
->>>>>>> 63a65144834d0d32ac87298d163085fa8f9964f4
 
 
 --------------------------------------------------------------------------------------
@@ -314,12 +293,9 @@ nibble3 <= "0000";
 -----------------------------------------------------------------------------
 --Instantiate the design you with to implement below and start wiring it up!:
 -----------------------------------------------------------------------------
-<<<<<<< HEAD
-=======
 
 --uncomment this instantiatino for moore elevator(regular and prime numbers)
 
->>>>>>> 63a65144834d0d32ac87298d163085fa8f9964f4
 --Inst_MooreElevatorController_Shell: MooreElevatorController_Shell PORT MAP(
 --		clk => ClockBus_sig(25),
 --		reset => switch(0),
@@ -327,14 +303,10 @@ nibble3 <= "0000";
 --		up_down => switch(7),
 --		floorMo => floorMo
 --	);
-<<<<<<< HEAD
---	
-=======
 
 --------------------------------------------------------------------------------------
 
 --uncomment this instantiation for mealy elevator
->>>>>>> 63a65144834d0d32ac87298d163085fa8f9964f4
 --Inst_MealyElevatorController_Shell: MealyElevatorController_Shell PORT MAP(
 --		clk => ClockBus_sig(25),
 --		reset => switch(0),
@@ -344,23 +316,6 @@ nibble3 <= "0000";
 --		nextfloorMe => nextfloorMe
 --	);
 	
-<<<<<<< HEAD
-Inst_MooreElevatorChooseInputs: MooreElevatorChooseInputs PORT MAP(
-		clk => ClockBus_sig(25),
-		reset => btn(0),
-		stop => btn(1),
-		up_down => switch,
---		up_down(0) => switch(0),
---		up_down(1) => switch(1),
---		up_down(2) => switch(2),
---		up_down(3) => switch(3),
---		up_down(4) => switch(4),
---		up_down(5) => switch(5),
---		up_down(6) => switch(6),
---		up_down(7) => switch(7),
-		floorMc => floorMc
-	);
-=======
 --------------------------------------------------------------------------------------
 
 --uncomment this instantiation for moore elevator with changable inputs
@@ -372,7 +327,6 @@ Inst_MooreElevatorChooseInputs: MooreElevatorChooseInputs PORT MAP(
 --		up_down => switch,
 --		floorMc => floorMc
 --	);
->>>>>>> 63a65144834d0d32ac87298d163085fa8f9964f4
 
 end Behavioral;
 
