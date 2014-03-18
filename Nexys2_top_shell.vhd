@@ -1,9 +1,9 @@
 ----------------------------------------------------------------------------------
 -- Company: USAFA
--- Engineer: Silva
+-- Engineer: Jeremy Gruszka
 -- 
--- Create Date:    12:43:25 07/07/2012 
--- Module Name:    Nexys2_Lab3top - Behavioral 
+-- Create Date:     
+-- Module Name:    Nexys2_top_shell - Behavioral 
 -- Target Devices: Nexys2 Project Board
 -- Tool versions: 
 -- Description: This file is a shell for implementing designs on a NEXYS 2 board
