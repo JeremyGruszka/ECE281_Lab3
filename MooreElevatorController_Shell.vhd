@@ -1,10 +1,10 @@
 -- Company: USAFA/DFEC
--- Engineer: Silva
+-- Engineer: Jeremy Gruszka
 -- 
--- Create Date:    	10:33:47 07/07/2012 
--- Design Name:		CE3
+-- Create Date:    	 
+-- Design Name:		Lab3
 -- Module Name:    	MooreElevatorController_Shell - Behavioral 
--- Description: 		Shell for completing CE3
+-- Description: 	Elevator program that can function as either a regular 4 floor moore elevator or an 8 floor prime number elevator
 --
 ----------------------------------------------------------------------------------
 library IEEE;
