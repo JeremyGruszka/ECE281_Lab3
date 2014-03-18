@@ -1,14 +1,14 @@
 ----------------------------------------------------------------------------------
 -- Company: USAFA/DFEC
--- Engineer: Silva
+-- Engineer: Jeremy Gruszka
 -- 
 -- Create Date:    10:33:47 07/07/2012 
 -- Design Name: 
--- Module Name:    MooreElevatorController_Silva - Behavioral 
--- Project Name: 
+-- Module Name:    MooreElevatorController_Shell - Behavioral 
+-- Project Name: 	Lab3
 -- Target Devices: 
 -- Tool versions: 
--- Description: 
+-- Description: Creates an elevator using a mealy machine design
 --
 -- Dependencies: 
 --
