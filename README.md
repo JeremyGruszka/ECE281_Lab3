@@ -30,3 +30,49 @@ ECE281_Lab3
 19. starting to study for the test..........
 
 #### Code Critique
+The following is my critique of the MooreElevatorController_Shell provided to us for CE3. I will give bad code, followed the reworked good code.
+
+###### Bad Code
+`if clk'event and clk='1' then`
+This code is bad because it is a confusing way to show that the process is happening on a rising clock edge
+
+###### Good Code
+`if rising_edge(clk) then`
+This code is good because it is much more easily seen that the code happens on a rising edge clock
+
+###### Bad Code 
+`when floor3 =>`
+					`if (							) then `
+					`	floor_state <= `
+					`elsif (						) then `
+					`	floor_state <= 	`
+					`else`
+					`	floor_state <= 	`
+					`end if;`
+				`when floor4 =>`
+				`	if (							) then `
+				`		floor_state <= 	`
+				`	else `
+				`		floor_state <= 	`
+				`	end if;`
+This code is bad because the if statements are left blank, and thus would not compile correctly
+
+###### Good Code
+`when floor3 =>`
+					`if (up_down = '1' and stop = '0') then `
+					`	floor_state <= floor4;`
+					`elsif (up_down = '0' and stop = '0') then `
+					`	floor_state <= 	floor2;`
+					`else`
+					`	floor_state <= floor3;	`
+					`end if;`
+				`when floor4 =>`
+				`	if (up_down = '0' and stop = '0') then `
+				`		floor_state <= 	floor3;`
+				`	else `
+				`		floor_state <= 	floor4;`
+				`	end if;`
+				
+###### Bad Code
+
+
