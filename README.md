@@ -41,21 +41,21 @@ This code is bad because it is a confusing way to show that the process is happe
 This code is good because it is much more easily seen that the code happens on a rising edge clock
 
 ###### Bad Code 
-`when floor3 =>`
-					`if (							) then `
-					`	floor_state <= `
-					`elsif (						) then `
-					`	floor_state <= 	`
-					`else`
-					`	floor_state <= 	`
-					`end if;`
-				`when floor4 =>`
-				`	if (							) then `
-				`		floor_state <= 	`
-				`	else `
-				`		floor_state <= 	`
-				`	end if;`
-This code is bad because the if statements are left blank, and thus would not compile correctly
+	when floor3 =>
+	if (							) then 
+	floor_state <= 
+	elsif (						) then 
+	floor_state <= 	
+	else
+	floor_state <= 	
+	end if;
+	when floor4 =>
+	if (							) then 
+	floor_state <= 	
+	else 
+	floor_state <= 	
+	end if;
+	This code is bad because the if statements are left blank, and thus would not compile correctly
 
 ###### Good Code
 `when floor3 =>`
