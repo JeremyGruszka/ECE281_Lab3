@@ -33,11 +33,11 @@ ECE281_Lab3
 The following is my critique of the MooreElevatorController_Shell provided to us for CE3. I will give bad code, followed the reworked good code.
 
 ###### Bad Code
-`if clk'event and clk='1' then`
+`if clk'event and clk='1' then`                                                                                         
 This code is bad because it is a confusing way to show that the process is happening on a rising clock edge
 
 ###### Good Code
-`if rising_edge(clk) then`
+`if rising_edge(clk) then`                                                                                              
 This code is good because it is much more easily seen that the code happens on a rising edge clock
 
 ###### Bad Code 
@@ -55,24 +55,38 @@ This code is good because it is much more easily seen that the code happens on a
 	else 
 	floor_state <= 	
 	end if;
-	This code is bad because the if statements are left blank, and thus would not compile correctly
+This code is bad because the if statements are left blank, and thus would not compile correctly
 
 ###### Good Code
-`when floor3 =>`
-					`if (up_down = '1' and stop = '0') then `
-					`	floor_state <= floor4;`
-					`elsif (up_down = '0' and stop = '0') then `
-					`	floor_state <= 	floor2;`
-					`else`
-					`	floor_state <= floor3;	`
-					`end if;`
-				`when floor4 =>`
-				`	if (up_down = '0' and stop = '0') then `
-				`		floor_state <= 	floor3;`
-				`	else `
-				`		floor_state <= 	floor4;`
-				`	end if;`
+	when floor3 =>
+	if (up_down = '1' and stop = '0') then 
+	floor_state <= floor4;
+	elsif (up_down = '0' and stop = '0') then 
+	floor_state <= 	floor2;
+	else
+	floor_state <= floor3;	
+	end if;
+	when floor4 =>
+	if (up_down = '0' and stop = '0') then 
+	floor_state <= 	floor3;
+	else 
+	floor_state <= 	floor4;
+	end if;
+This code is better because it is correctly filled in and will run when compiled	
 				
 ###### Bad Code
+	floor <= "0001" when (floor_state =       ) else
+	"0010" when (                    ) else
+	"0011" when (                    ) else
+	"0100" when (                    ) else
+	"0001";
+This code is bad because the if statements are left blank, and thus would not compile correctly
 
+###### Good Code
+	floor <= "0001" when (floor_state = floor1) else
+	"0010" when (floor_state = floor2) else
+	"0011" when (floor_state = floor3) else
+	"0100" when (floor_state = floor4) else
+	"0001";
+This code is better because it is correctly filled in and will run when compiled
 
